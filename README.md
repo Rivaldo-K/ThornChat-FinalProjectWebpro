@@ -1,2 +1,2 @@
-# Blazechat
+# ThornChat
  
