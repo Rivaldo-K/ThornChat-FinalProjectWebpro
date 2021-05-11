@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
-import { useFirestoreQuery } from './hooks';
-import Message from './Message';
+import { useFirestoreQuery } from '../components/hooks';
+import Message from '../components/Message';
 
 const Channel = ({ user = null }) => {
     const db = firebase.firestore();
