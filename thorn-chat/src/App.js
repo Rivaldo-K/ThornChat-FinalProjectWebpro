@@ -63,9 +63,9 @@ function App() {
               />
             React ThornChat
           </h2>
-          <p className="mb-8 text-lg text-center">
-            Easy to chat with someone !
-          </p>
+          <div style={{display: 'flex',  justifyContent:'center', alignItems:'center', height: '100vh'}}>
+    <h1> Easy to chat with everyone! </h1>
+</div>
           <button
             onClick={signInWithGoogle}
             className="rounded shadow-button pl-6 pr-8 py-3 bg-white hover:bg-gray-50 text-gray-600 font-medium flex items-center justify-center overflow-y-hidden focus:outline-none focus:ring focus:ring-primary-500 focus:ring-opacity-75"

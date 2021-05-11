@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react';
+import { useEffect, useState, useRef, } from 'react';
 
 export function useFirestoreQuery(query) {
   const [docs, setDocs] = useState([]);
@@ -93,31 +93,4 @@ export function useLocalStorage(key, initialValue) {
   };
 
   return [storedValue, setValue];
-}
-
-export function useMedia(queries, values, defaultValue) {
-
-  const mediaQueryLists = queries.map(q => window.matchMedia(q));
-
-
-  const getValue = useCallback(() => {
-
-    const index = mediaQueryLists.findIndex(mql => mql.matches);
-
-    return typeof values[index] !== 'undefined' ? values[index] : defaultValue;
-  }, [mediaQueryLists, values, defaultValue]);
-
-
-  const [value, setValue] = useState(getValue);
-
-  useEffect(() => {
-
-    const handler = () => setValue(getValue);
-
-    mediaQueryLists.forEach(mql => mql.addListener(handler));
-
-    return () => mediaQueryLists.forEach(mql => mql.removeListener(handler));
-  }, [getValue, mediaQueryLists]);
-
-  return value;
 }
