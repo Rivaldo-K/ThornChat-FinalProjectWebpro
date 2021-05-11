@@ -5,6 +5,8 @@ import Button from './components/Button';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/firestore';
+import Channel from './components/Channel';
+import { useAuthState, useDarkMode } from './components/hooks';
 
 firebase.initializeApp({
   apiKey: "AIzaSyBtKnbRa2b021dcDv_pTjHUOy-YqujtZTc",
@@ -16,6 +18,7 @@ firebase.initializeApp({
 });
 
 const auth = firebase.auth();
+const db = firebase.firestore();
 
 function App() {
   const [user, setUser] = useState(() => auth.currentUser);
@@ -54,7 +57,7 @@ function App() {
     try {
       await firebase.auth().signOut();
     } catch (error) {
-      console.log(error.massage);
+      console.log(error.message);
     }
   };
 
@@ -65,7 +68,7 @@ function App() {
       {user ? (
         <>
           <Button onClick={signOut}>Sign out</Button>
-          <p>Welcome to the chat</p>
+          <Channel user={user} db={db} />
         </>
     ) : (
       <Button onClick={signInWithGoogle}>Sign in with google</Button>
