@@ -18,7 +18,24 @@ firebase.initializeApp({
 const auth = firebase.auth();
 
 function App() {
-const [user, setUser] = useState(() => auth.currentUser);
+  const [user, setUser] = useState(() => auth.currentUser);
+  const [initializing, setinitializing] = useState(true);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+      if (initializing) {
+        setinitializing(false);
+      }
+    })
+
+    // cleanup subscription
+    return unsubscribe
+  }, []);
 
   const signInWithGoogle = async () => {
     // retrive google provider object
@@ -31,10 +48,28 @@ const [user, setUser] = useState(() => auth.currentUser);
     } catch (error) {
       console.error(error);
     }
-  }
+  };
+
+  const signOut = async () => {
+    try {
+      await firebase.auth().signOut();
+    } catch (error) {
+      console.log(error.massage);
+    }
+  };
+
+  if (initializing) return "Loading ...";
+
   return (
     <div>
-      <button onClick={signInWithGoogle}>Sign in with google</button>
+      {user ? (
+        <>
+          <Button onClick={signOut}>Sign out</Button>
+          <p>Welcome to the chat</p>
+        </>
+    ) : (
+      <Button onClick={signInWithGoogle}>Sign in with google</Button>
+    )}
     </div>
   );
 }
