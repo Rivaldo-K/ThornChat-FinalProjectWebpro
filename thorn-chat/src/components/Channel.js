@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
-import { useFirestoreQuery } from '../components/hooks';
-import Message from '../components/Message';
+import { useFirestoreQuery } from './hooks';
+import Message from './Message';
 
 const Channel = ({ user = null }) => {
     const db = firebase.firestore();
@@ -56,10 +55,10 @@ const Channel = ({ user = null }) => {
           <div className="border-b dark:border-gray-600 border-gray-200 py-8 mb-4">
             <div className="font-bold text-3xl text-center">
               <p className="mb-1">Welcome to</p>
-              <p className="mb-3">React FireChat</p>
+              <p className="mb-3">React ThornChat</p>
             </div>
             <p className="text-gray-400 text-center">
-              This is the beginning of this chat.
+              This is the beginning of this chat!
             </p>
           </div>
           <ul>
